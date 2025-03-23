@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teodor Burov - Front-end / Fullstack Web Developer</title>
+    <meta name="description" content="Teodor Burov's professional resume showcasing expertise in React, Next.js, TypeScript, and full-stack development.">
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #1e293b;
+            --accent-color: #3b82f6;
+            --accent-color-light: #60a5fa;
+            --background-color: #ffffff;
+            --text-color: #334155;
+            --section-bg: #f8fafc;
+            --tag-bg: #e2e8f0;
+            --font-primary: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            --font-secondary: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            --border-radius: 10px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        /* Global Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            max-width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        a:hover {
+            color: var(--accent-color-light);
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        /* Layout */
+        .cv-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            height: 100%;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        /* Name and Title */
+        .name {
+            font-size: 2.75rem;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Information */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item img {
+            width: 18px;
+            height: 18px;
+            filter: invert(32%) sepia(98%) saturate(1368%) hue-rotate(202deg) brightness(96%) contrast(96%);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--section-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 1.5rem;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 1px;
+        }
+
+        /* Skills */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tag {
+            background-color: var(--tag-bg);
+            color: var(--secondary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .skill-tag:hover {
+            background-color: var(--accent-color-light);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent-color);
+        }
+
+        .education-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .education-item p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        /* Languages */
+        .languages-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .languages-item span {
+            font-weight: 600;
+        }
+
+        .proficiency {
+            display: inline-block;
+            width: 120px;
+            height: 6px;
+            background-color: var(--tag-bg);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-left: 0.5rem;
+        }
+
+        .proficiency-level {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        .proficiency-native {
+            width: 100%;
+        }
+
+        /* Experience */
+        .experience-item, .project-item {
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background-color: var(--section-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .experience-item:hover, .project-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .experience-item h3, .project-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-item h4, .project-item h4 {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item ul, .project-item ul {
+            list-style-type: none;
+            margin-left: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .experience-item li, .project-item li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item li:before, .project-item li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Project Technologies */
+        .project-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-technologies span {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-color);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .project-technologies span:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .project-website {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .project-website svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent-color);
+        }
+
+        /* Print Styles */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.5cm;
+            }
+
+            body {
+                padding: 0;
+                font-size: 11pt;
+                background-color: white;
+                color: black;
+                box-shadow: none;
+            }
+
+            .cv-container {
+                grid-template-columns: 0.9fr 2.1fr;
+                gap: 1.5rem;
+            }
+
+            .sidebar, .experience-item, .project-item {
+                box-shadow: none;
+                background-color: transparent;
+                border: 1px solid #eee;
+            }
+
+            .name {
+                font-size: 24pt;
+                background: none;
+                -webkit-text-fill-color: var(--primary-color);
+                text-fill-color: var(--primary-color);
+                color: var(--primary-color);
+            }
+
+            .title {
+                font-size: 14pt;
+            }
+
+            .section-title {
+                font-size: 13pt;
+            }
+
+            .skill-tag, .project-technologies span {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .contact-item img {
+                filter: none;
+            }
+
+            a, a:hover {
+                color: var(--primary-color);
+                text-decoration: none;
+            }
+
+            a::after {
+                display: none;
+            }
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .cv-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <header>
+            <h1 class="name">Teodor Burov</h1>
+            <h2 class="title">Front-end / Fullstack Web Developer</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="https://www.svgrepo.com/show/345331/send-message-envelope-fast-email-post-address.svg" alt="Email">
+                    <a href="mailto:burov96@gmail.com">burov96@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <img src="https://www.svgrepo.com/show/345293/telephone-call-communication-support-dial-business-phone.svg" alt="Phone">
+                    <a href="tel:+359887831660">+359 8878 31660</a>
+                </div>
+                <div class="contact-item">
+                    <img src="https://www.svgrepo.com/show/345365/placeholder-pin-place-people-holder-maps-location.svg" alt="Location">
+                    <span>Sofia, Bulgaria</span>
+                </div>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <section class="section">
+                <h3 class="section-title">Professional Summary</h3>
+                <p>
+                    Front-end/Fullstack Developer proficient in server-side and client-side rendering, state management, and database integration. Over 3 years of experience in building responsive and scalable web applications using React, Next.js, and TypeScript.
+                </p>
+            </section>
+
+            <section class="section">
+                <h3 class="section-title">Technical Skills</h3>
+                <div class="skills">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Next.js 14</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Prisma</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">GraphQL</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Ruby on Rails</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">Adobe Illustrator</span>
+                    <span class="skill-tag">AfterEffects</span>
+                    <span class="skill-tag">Redux</span>
+                    <span class="skill-tag">Vercel</span>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3 class="section-title">Education</h3>
+                <div class="education-item">
+                    <h4>Software University</h4>
+                    <p>JavaScript Development<br>
+                    04/2022 - Present<br>
+                    Sofia, Bulgaria | GPA: 5.88</p>
+                </div>
+                <div class="education-item">
+                    <h4>PU Plovdiv's University</h4>
+                    <p>Molecular Biology<br>
+                    08/2015 - 02/2020<br>
+                    Plovdiv, Bulgaria | GPA: 5.00</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3 class="section-title">Languages</h3>
+                <div class="languages-item">
+                    <span>English</span>
+                    <div class="proficiency">
+                        <div class="proficiency-level proficiency-native"></div>
+                    </div>
+                </div>
+                <div class="languages-item">
+                    <span>Bulgarian</span>
+                    <div class="proficiency">
+                        <div class="proficiency-level proficiency-native"></div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <main class="main-content">
+            <section class="section">
+                <h3 class="section-title">Professional Experience</h3>
+                <div class="experience-item">
+                    <h3>Front-end Developer</h3>
+                    <h4>Freelance</h4>
+                    <span class="date-badge">12/2022 - Present</span>
+                    <ul>
+                        <li>Specializing in creating web- and mobile-responsive single-page applications (SPAs) for US clients.</li>
+                        <li>Utilizing modern JavaScript frameworks like React and Next.js, along with styling libraries such as Tailwind CSS, Three.js, and Bootstrap.</li>
+                        <li>Implemented custom animations using Figma and created illustrative animations with Adobe Illustrator and AfterEffects.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3 class="section-title">Personal Projects</h3>
+                
+                <div class="project-item">
+                    <h3>Spiritual Thoughts - Social Media App</h3>
+                    <div class="project-technologies">
+                        <span>React</span>
+                        <span>Next.js 14</span>
+                        <span>Prisma</span>
+                        <span>Tailwind CSS</span>
+                        <span>NextAuth.js</span>
+                        <span>Vercel</span>
+                        <span>MySQL</span>
+                        <span>GraphQL</span>
+                    </div>
+                    <p>A comprehensive platform for sharing spiritual thoughts, enabling users to post, like, and interact with others' reflections. Features include user authentication, real-time updates, and personalized user profiles with dynamic color theming.</p>
+                    <ul>
+                        <li>Implemented consistent user interface with dynamic color theming.</li>
+                        <li>Enhanced user experience through responsive design and real-time interactions.</li>
+                        <li>Integrated secure authentication using NextAuth.js and Prisma.</li>
+                    </ul>
+                    <a href="https://spiritual-thoughts.vercel.app/" target="_blank" class="project-website">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/>
+                        </svg>
+                        View Project: Spiritual Thoughts
+                    </a>
+                </div>
+
+                <div class="project-item">
+                    <h3>PicUp - Image Hosting App</h3>
+                    <div class="project-technologies">
+                        <span>JavaScript</span>
+                        <span>Tailwind</span>
+                        <span>React</span>
+                        <span>Next.js</span>
+                        <span>Supabase</span>
+                        <span>SQL</span>
+                    </div>
+                    <p>A full-stack Next.js 14 photo-sharing application with user authentication and database integration.</p>
+                    <a href="https://pic-up-rho.vercel.app/" target="_blank" class="project-website">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/>
+                        </svg>
+                        View Project: PicUp
+                    </a>
+                </div>
+
+                <div class="project-item">
+                    <h3>HyperForm - E-commerce Store</h3>
+                    <div class="project-technologies">
+                        <span>React</span>
+                        <span>Vite</span>
+                        <span>ExpressJS</span>
+                        <span>Firebase</span>
+                        <span>Node.js</span>
+                        <span>Tailwind CSS</span>
+                        <span>EmailJS</span>
+                        <span>Context API</span>
+                        <span>Toastify</span>
+                    </div>
+                    <p>A mobile/web responsive full-stack single-page application representing a hypothetical e-commerce store with advanced features such as product listings, cart functionality, register/login functionality, and various animations and notifications.</p>
+                    <ul>
+                        <li>Implemented an intuitive shopping experience with responsive design, enhancing customer interaction.</li>
+                        <li>Developed the application from scratch, including design and functionality.</li>
+                    </ul>
+                    <a href="https://hyperform-6137a.web.app/" target="_blank" class="project-website">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/>
+                        </svg>
+                        View Project: HyperForm
+                    </a>
+                </div>
+
+                <div class="project-item">
+                    <h3>The Zone - Forum-like App</h3>
+                    <div class="project-technologies">
+                        <span>React</span>
+                        <span>Next.js</span>
+                        <span>Redux</span>
+                        <span>Tailwind CSS</span>
+                        <span>Lottie-React</span>
+                        <span>React Toastify</span>
+                        <span>MongoDB</span>
+                        <span>Node.js</span>
+                        <span>Vercel</span>
+                    </div>
+                    <p>A mobile/web responsive full-stack forum application with enhanced user experience through responsive design and theme management.</p>
+                    <ul>
+                        <li>Improved user experience with responsive design and theme management.</li>
+                        <li>Successfully implemented Redux in a Next.js environment with server-side rendering.</li>
+                    </ul>
+                    <a href="https://the-zone-baby.vercel.app/" target="_blank" class="project-website">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/>
+                        </svg>
+                        View Project: The Zone
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
